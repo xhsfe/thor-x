@@ -1,2 +1,4 @@
 docs/
 .optimize
+__test__
+dist/
