@@ -26,7 +26,6 @@ module.exports = {
  */
 
 const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config')
-const path = require('path')
 import { serializer } from '@xhsfe/babel-plugin-tree-shaking'
 
 /**
@@ -36,18 +35,11 @@ import { serializer } from '@xhsfe/babel-plugin-tree-shaking'
  * @type {import('metro-config').MetroConfig}
  */
 const config = {
+  // ...
   serializer: {
     customSerializer: process.env.PRE_BUILD && !process.env.DISABLE_OPTIMIZE ? serializer : undefined,
   },
-  resolver: {
-    unstable_enableSymlinks: true,
-  },
-  watchFolders: [path.join(__dirname, '..', '..', 'node_modules')],
-  /** disable all stores for concurrent builds */
-  cacheStores: [],
-  // TODO: support IPC communications or other ways to store isLive information to serialize
-  // maxWorkers: 1,
-  // transformer: esbuildTransformerConfig,
+  // ...
 }
 
 module.exports = mergeConfig(getDefaultConfig(__dirname), config)
@@ -58,9 +50,9 @@ module.exports = mergeConfig(getDefaultConfig(__dirname), config)
 ```sh
 # METRO_TREE_SHAKING_CACHE_ROOT is recommended to set under os.tmpdir()
 # generate manifest for optimization
-PRE_BUILD=1 METRO_TREE_SHAKING_CACHE_ROOT=${METRO_TREE_SHAKING_CACHE_ROOT} react-native bundle --platform=android --entry-file=${ENTRY_FILE} --bundle-output=${BUNDLE_OUTPUT}/main.jsbundle --sourcemap-output=${BUNDLE_OUTPUT}/main.jsbundle.map --dev=true
+PRE_BUILD=1 METRO_TREE_SHAKING_CACHE_ROOT=${METRO_TREE_SHAKING_CACHE_ROOT} react-native bundle --platform=android --entry-file=${ENTRY_FILE} --bundle-output=${BUNDLE_OUTPUT}/main.jsbundle --sourcemap-output=${BUNDLE_OUTPUT}/main.jsbundle.map
 # generate optimized jsbundle
-METRO_TREE_SHAKING_CACHE_ROOT=${METRO_TREE_SHAKING_CACHE_ROOT} react-native bundle --platform=android --entry-file=${ENTRY_FILE} --bundle-output=${BUNDLE_OUTPUT}/main.jsbundle --sourcemap-output=${BUNDLE_OUTPUT}/main.jsbundle.map --dev=true
+METRO_TREE_SHAKING_CACHE_ROOT=${METRO_TREE_SHAKING_CACHE_ROOT} react-native bundle --platform=android --entry-file=${ENTRY_FILE} --bundle-output=${BUNDLE_OUTPUT}/main.jsbundle --sourcemap-output=${BUNDLE_OUTPUT}/main.jsbundle.map
 ```
 
 ## Limitation
