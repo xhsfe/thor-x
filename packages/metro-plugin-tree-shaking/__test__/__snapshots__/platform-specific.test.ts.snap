@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tree shaking stats is pure, final live state of parts is decided by metroGraph in serializer 1`] = `
+"[
+	{
+		"count": 4,
+		"removed": true,
+		"value": "exports.add = void 0;\\nexports.div = div;\\nexports.mul = _;\\nexports.sub = void 0;\\n"
+	},
+	{
+		"count": 1,
+		"added": true,
+		"value": "exports.platform = exports.add = void 0;\\n"
+	},
+	{
+		"count": 10,
+		"removed": true,
+		"value": "function div(a, b) {\\nreturn a / b;\\n}\\nvar sub = exports.sub = function sub(a, b) {\\nreturn a - b;\\n};\\nfunction _(a, b) {\\nreturn a * b;\\n}\\n},1,[],\\"__test__/libs/math.js\\");\\n"
+	},
+	{
+		"count": 2,
+		"added": true,
+		"value": "var platform = exports.platform = 'android';\\n},1,[],\\"__test__/libs/math.android.js\\");\\n"
+	},
+	{
+		"count": 1,
+		"removed": true,
+		"value": "//# sourceMappingURL=origin.jsbundle.map"
+	},
+	{
+		"count": 1,
+		"added": true,
+		"value": "//# sourceMappingURL=optimize.android.jsbundle.map"
+	}
+]"
+`;
+
+exports[`tree shaking stats is pure, final live state of parts is decided by metroGraph in serializer 2`] = `
+"[
+	{
+		"count": 4,
+		"removed": true,
+		"value": "exports.add = void 0;\\nexports.div = div;\\nexports.mul = _;\\nexports.sub = void 0;\\n"
+	},
+	{
+		"count": 1,
+		"added": true,
+		"value": "exports.platform = exports.add = void 0;\\n"
+	},
+	{
+		"count": 10,
+		"removed": true,
+		"value": "function div(a, b) {\\nreturn a / b;\\n}\\nvar sub = exports.sub = function sub(a, b) {\\nreturn a - b;\\n};\\nfunction _(a, b) {\\nreturn a * b;\\n}\\n},1,[],\\"__test__/libs/math.js\\");\\n"
+	},
+	{
+		"count": 2,
+		"added": true,
+		"value": "var platform = exports.platform = 'ios';\\n},1,[],\\"__test__/libs/math.ios.js\\");\\n"
+	},
+	{
+		"count": 1,
+		"removed": true,
+		"value": "//# sourceMappingURL=origin.jsbundle.map"
+	},
+	{
+		"count": 1,
+		"added": true,
+		"value": "//# sourceMappingURL=optimize.ios.jsbundle.map"
+	}
+]"
+`;

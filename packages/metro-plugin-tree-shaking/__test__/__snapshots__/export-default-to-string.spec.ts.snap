@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`use import specifier to rename lib's named export 1`] = `
+"[
+	{
+		"count": 1,
+		"removed": true,
+		"value": "exports.stringIfy = stringIfy;\\n"
+	},
+	{
+		"count": 17,
+		"removed": true,
+		"value": "function stringIfy(obj) {\\nreturn JSON.stringify(obj, function (key, value) {\\nvar fnBody;\\nif (value instanceof Function || typeof value === 'function') {\\nfnBody = value.toString();\\nif (fnBody.length < 8 || fnBody.substring(0, 8) !== 'function') {\\n// this is ES6 Arrow Function\\nreturn \`_NuFrRa_\${fnBody}\`;\\n}\\nreturn fnBody;\\n}\\nif (value instanceof RegExp) {\\nreturn \`_PxEgEr_\${value}\`;\\n}\\nreturn value;\\n});\\n}\\n"
+	},
+	{
+		"count": 1,
+		"removed": true,
+		"value": "//# sourceMappingURL=origin.jsbundle.map"
+	},
+	{
+		"count": 1,
+		"added": true,
+		"value": "//# sourceMappingURL=optimize.jsbundle.map"
+	}
+]"
+`;

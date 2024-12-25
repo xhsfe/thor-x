@@ -1,0 +1,11 @@
+{
+  "name": "@xhsfe/babel-plugin-tree-shaking",
+  "version": "0.1.0",
+  "private": false,
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {},
+  "keywords": ["react-native", "tree-shaking", "metro"],
+  "author": "Xiaohongshu FE Open Source",
+  "license": "MIT"
+}

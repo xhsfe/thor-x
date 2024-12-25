@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`import export specifier from lib 1`] = `
+"[
+	{
+		"count": 1,
+		"removed": true,
+		"value": "exports.setup = exports.env = void 0;\\n"
+	},
+	{
+		"count": 1,
+		"added": true,
+		"value": "exports.setup = void 0;\\n"
+	},
+	{
+		"count": 1,
+		"removed": true,
+		"value": "var env = exports.env = function env() {\\n"
+	},
+	{
+		"count": 1,
+		"added": true,
+		"value": "var env = function env() {\\n"
+	},
+	{
+		"count": 1,
+		"removed": true,
+		"value": "//# sourceMappingURL=origin.jsbundle.map"
+	},
+	{
+		"count": 1,
+		"added": true,
+		"value": "//# sourceMappingURL=optimize.jsbundle.map"
+	}
+]"
+`;

@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`import export specifier from lib 1`] = `
+"[
+	{
+		"count": 3,
+		"removed": true,
+		"value": "exports.div = div;\\nexports.mul = _;\\nexports.sub = void 0;\\n"
+	},
+	{
+		"count": 4,
+		"removed": true,
+		"value": "function div(a, b) {\\nreturn a / b;\\n}\\nvar sub = exports.sub = function sub(a, b) {\\n"
+	},
+	{
+		"count": 1,
+		"added": true,
+		"value": "var sub = function sub(a, b) {\\n"
+	},
+	{
+		"count": 3,
+		"removed": true,
+		"value": "function _(a, b) {\\nreturn a * b;\\n}\\n"
+	},
+	{
+		"count": 1,
+		"removed": true,
+		"value": "//# sourceMappingURL=origin.jsbundle.map"
+	},
+	{
+		"count": 1,
+		"added": true,
+		"value": "//# sourceMappingURL=optimize.jsbundle.map"
+	}
+]"
+`;
