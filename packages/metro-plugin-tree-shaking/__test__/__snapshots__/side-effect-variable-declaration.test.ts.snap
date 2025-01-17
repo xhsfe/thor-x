@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`import export specifier from lib 1`] = `
+"[
+	{
+		"count": 25,
+		"removed": true,
+		"value": "__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {\\nvar pureTime = /* @__PURE__ */setTimeout(function () {\\n// 获取 live 信息\\nalert(\\"I am side effect statement! Don't Shake me !\\");\\nclearTimeout(time);\\n}, 100);\\nvar time = setTimeout(function () {\\n// 获取 live 信息\\nalert(\\"I am side effect statement! Don't Shake me !\\");\\nclearTimeout(time);\\n}, 100);\\nvar protectMe = {\\nkey: setTimeout(function () {\\n// 获取 live 信息\\nalert(\\"I am side effect statement! Don't Shake me !\\");\\n}, 100)\\n};\\nvar shakeMe = {\\nkey: 'Please shake me'\\n};\\n\\n// esbuild ClassCanBeRemovedIfUnused\\n// ExprCanBeRemovedIfUnused\\n// StmtsCanBeRemovedIfUnused\\n},0,[],\\"__test__/side-effect-variable-declaration.ts\\");\\n"
+	},
+	{
+		"count": 1,
+		"added": true,
+		"value": "__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {},0,[],\\"__test__/side-effect-variable-declaration.ts\\");\\n"
+	},
+	{
+		"count": 1,
+		"removed": true,
+		"value": "//# sourceMappingURL=origin.jsbundle.map"
+	},
+	{
+		"count": 1,
+		"added": true,
+		"value": "//# sourceMappingURL=optimize.jsbundle.map"
+	}
+]"
+`;

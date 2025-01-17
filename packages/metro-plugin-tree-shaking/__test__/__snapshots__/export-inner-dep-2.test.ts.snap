@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`import export specifier from lib 1`] = `
+"[
+	{
+		"count": 1,
+		"removed": true,
+		"value": "exports.TabsDefaultProps = exports.TabThemeType = exports.TabSizeType = exports.TabLayoutType = exports.TabLabelType = exports.TabDefaultProps = void 0;\\n"
+	},
+	{
+		"count": 1,
+		"added": true,
+		"value": "exports.TabThemeType = exports.TabSizeType = exports.TabLayoutType = exports.TabLabelType = exports.TabDefaultProps = void 0;\\n"
+	},
+	{
+		"count": 1,
+		"removed": true,
+		"value": "}({}); // eslint-disable-next-line @typescript-eslint/no-empty-interface\\n"
+	},
+	{
+		"count": 1,
+		"added": true,
+		"value": "}({});\\n"
+	},
+	{
+		"count": 10,
+		"removed": true,
+		"value": "var TabsDefaultProps = exports.TabsDefaultProps = {\\ntheme: TabThemeType.underline,\\nsize: TabSizeType.normal,\\nlabelType: TabLabelType.leftIcon,\\nlayout: TabLayoutType.space,\\nbadge: false,\\nspaceWidth: 12,\\ntabPadding: 24,\\nactive: ''\\n};\\n"
+	},
+	{
+		"count": 1,
+		"removed": true,
+		"value": "//# sourceMappingURL=origin.jsbundle.map"
+	},
+	{
+		"count": 1,
+		"added": true,
+		"value": "//# sourceMappingURL=optimize.jsbundle.map"
+	}
+]"
+`;

@@ -1,6 +1,6 @@
 {
   "name": "@xhsfe/babel-plugin-tree-shaking",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": false,
   "description": "",
   "main": "src/index.js",

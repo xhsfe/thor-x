@@ -341,6 +341,15 @@ module.exports = function plugin(api, options) {
                   graph[state.filename].exports[part.declaration.id.name] = [
                     partId,
                   ]
+                  /**
+                   * mark TSEnumDeclaration because babel scope.bindings don't have these enums, just disable shaking for it now.
+                   * export const enum TabLabelType {
+                   *  leftIcon = 'leftIcon'
+                   * }
+                   */
+                  if (part.declaration.type === 'TSEnumDeclaration') {
+                    currentPart.sideEffect = true
+                  }
                 }
               } else if (part.specifiers) {
                 /**
