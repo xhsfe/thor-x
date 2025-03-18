@@ -1,5 +1,13 @@
 # @xhsfe/babel-plugin-tree-shaking
 
+## 0.1.4
+
+### Patch Changes
+
+- Improve internal cache behavior.
+  1. Use `unstable_transformResultKey` as cache key if possible
+  2. store the same tree shaking metadata in `file.metadata`
+
 ## 0.1.3
 
 ### Patch Changes

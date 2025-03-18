@@ -622,20 +622,22 @@ module.exports = function plugin(api, options) {
           /**
            * preserve local data if transform workerFarm is enabled.
            */
-          if (!state.file.metadata.treeShakingMeta) {
-            state.file.metadata.treeShakingMeta = graph[state.filename]
+          const treeShakingMeta = {
+            filename: state.filename,
+            // platform: state.file.opts.caller.platform,
+            data: graph[state.filename],
           }
-          const key = createHash('md5').update(state.filename).digest('hex')
+          if (!state.file.metadata.treeShakingMeta) {
+            state.file.metadata.treeShakingMeta = treeShakingMeta
+          }
+          const key = state.file.opts.caller.unstable_transformResultKey ?? 
+              join(state.file.opts.caller.platform, createHash('md5').update(state.filename).digest('hex'))
           if (!fs.existsSync(join(DEFAULT_ROOT, state.file.opts.caller.platform))) {
             fs.mkdirSync(join(DEFAULT_ROOT, state.file.opts.caller.platform), { recursive: true })
           }
           fs.writeFileSync(
-            join(DEFAULT_ROOT, state.file.opts.caller.platform, `${key}.json`),
-            JSON.stringify({
-              filename: state.filename,
-              // platform: state.file.opts.caller.platform,
-              data: graph[state.filename],
-            }),
+            join(DEFAULT_ROOT, `${key}.json`),
+            JSON.stringify(treeShakingMeta),
           )
         },
       },
