@@ -622,6 +622,9 @@ module.exports = function plugin(api, options) {
           /**
            * preserve local data if transform workerFarm is enabled.
            */
+          if (!state.file.metadata.treeShakingMeta) {
+            state.file.metadata.treeShakingMeta = graph[state.filename]
+          }
           const key = createHash('md5').update(state.filename).digest('hex')
           if (!fs.existsSync(join(DEFAULT_ROOT, state.file.opts.caller.platform))) {
             fs.mkdirSync(join(DEFAULT_ROOT, state.file.opts.caller.platform), { recursive: true })
