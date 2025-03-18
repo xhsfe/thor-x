@@ -1,5 +1,13 @@
 # @xhsfe/babel-plugin-tree-shaking
 
+## 0.1.5
+
+### Patch Changes
+
+- fix: make file cache location compatible with before
+
+Some internal plugin (code splitting) may depend on pre cache location
+
 ## 0.1.4
 
 ### Patch Changes

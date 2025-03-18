@@ -630,13 +630,12 @@ module.exports = function plugin(api, options) {
           if (!state.file.metadata.treeShakingMeta) {
             state.file.metadata.treeShakingMeta = treeShakingMeta
           }
-          const key = state.file.opts.caller.unstable_transformResultKey ?? 
-              join(state.file.opts.caller.platform, createHash('md5').update(state.filename).digest('hex'))
+          const key = state.file.opts.caller.unstable_transformResultKey ?? createHash('md5').update(state.filename).digest('hex')
           if (!fs.existsSync(join(DEFAULT_ROOT, state.file.opts.caller.platform))) {
             fs.mkdirSync(join(DEFAULT_ROOT, state.file.opts.caller.platform), { recursive: true })
           }
           fs.writeFileSync(
-            join(DEFAULT_ROOT, `${key}.json`),
+            join(DEFAULT_ROOT, state.file.opts.caller.platform, `${key}.json`),
             JSON.stringify(treeShakingMeta),
           )
         },
