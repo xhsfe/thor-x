@@ -1,5 +1,11 @@
 # @xhsfe/babel-plugin-tree-shaking
 
+## 0.1.7
+
+### Patch Changes
+
+- fix(cache): frozen file metadata after pass it to metro
+
 ## 0.1.6
 
 ### Patch Changes

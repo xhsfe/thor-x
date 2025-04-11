@@ -37,6 +37,7 @@ const DEFAULT_ROOT = process.env.METRO_TREE_SHAKING_CACHE_ROOT
  *   defer: boolean  // whether current file has 'use client' directive at the top
  *   deferrable: boolean // whether current file is deferrable. The file is deferrable when it is only required by the defer files
  *   isLive: boolean // whether current file is visited by entryPoint dependency graph
+ *   finalize: boolean // whether current file's metadata is finalized
  *   type: 'module' | 'commonjs' // current file's format
  * }
  *
@@ -622,6 +623,7 @@ module.exports = function plugin(api, options) {
           if (isSecondBuild) {
             return
           }
+          graph[state.filename].finalize = true
           /**
            * preserve local data if transform workerFarm is enabled.
            */
@@ -646,9 +648,9 @@ module.exports = function plugin(api, options) {
       MemberExpression: {
         enter(path, state) {
           if (
-            !isSecondBuild && (
-              path.node.object.name === 'exports'
-            )
+            !isSecondBuild 
+            && !graph[state.filename].finalize
+            && path.node.object.name === 'exports'
           ) {
             const partId = getPartId(graph[state.filename].parts, path.node)
 
@@ -668,6 +670,7 @@ module.exports = function plugin(api, options) {
         enter(path, state) {
           if (
             !isSecondBuild
+            && !graph[state.filename].finalize
             && (
               path.node.callee.type === 'Import'
               || (path.node.callee.type === 'Identifier' && path.node.callee.name === 'require')
