@@ -1,5 +1,11 @@
 # @xhsfe/babel-plugin-tree-shaking
 
+## 0.1.6
+
+### Patch Changes
+
+- fix(cache): only write treeShakingMeta in pre build stage
+
 ## 0.1.5
 
 ### Patch Changes

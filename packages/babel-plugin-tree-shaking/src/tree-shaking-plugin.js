@@ -619,6 +619,9 @@ module.exports = function plugin(api, options) {
           })
         },
         exit(_, state) {
+          if (isSecondBuild) {
+            return
+          }
           /**
            * preserve local data if transform workerFarm is enabled.
            */
