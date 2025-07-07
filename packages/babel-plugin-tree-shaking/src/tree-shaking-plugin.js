@@ -206,14 +206,11 @@ module.exports = function plugin(api, options) {
   } = options
 
   const allExcludePatterns = [...defaultExcludePatterns, ...excludePatterns]
-  const excludePattern = allExcludePatterns.join('|')
-  const excludeRegex = new RegExp(excludePattern)
 
-
-    // 检查文件是否应该被排除
-    function shouldExclude(filename) {
-      return allExcludePatterns.some(pattern => pattern.test(filename));
-    }
+  // check if the file should be excluded
+  function shouldExclude(filename) {
+    return allExcludePatterns.some(pattern => pattern.test(filename));
+  }
 
   return {
     visitor: {
