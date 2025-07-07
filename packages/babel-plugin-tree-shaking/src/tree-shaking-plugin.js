@@ -183,10 +183,45 @@ const getOriginExportLoc = (
   }
 }
 
+  // 默认排除规则
+  const defaultExcludePatterns = [
+    /react-native-url-polyfill/,
+    /polyfills/,
+    /@babel\/runtime/,
+    /metro-runtime\/src\/modules\/asyncRequire\.js/,
+    /@react-native\/asset-registry/,
+    /\.cjs(\.js)?$/,
+    /react-native\/Libraries\/Image\/AssetRegistry\.js/,
+    /jsx-runtime\./,
+  ]
+
+
 module.exports = function plugin(api, options) {
   if (!fs.existsSync(DEFAULT_ROOT)) {
     fs.mkdirSync(DEFAULT_ROOT, { recursive: true })
   }
+    // 合并用户自定义的排除规则
+  const {
+    excludePatterns = [],
+  } = options
+
+    
+  console.log(excludePatterns, 'excludePatterns')
+  const allExcludePatterns = [...defaultExcludePatterns, ...excludePatterns]
+  const excludePattern = allExcludePatterns.join('|')
+  const excludeRegex = new RegExp(excludePattern)
+  console.log(excludeRegex, 'excludeRegex')
+
+
+
+    // 检查文件是否应该被排除
+    function shouldExclude(filename) {
+      if (filename.includes('asgard')) {
+        console.log(filename, 'filename', allExcludePatterns.some(pattern => pattern.test(filename)))
+      }
+      return allExcludePatterns.some(pattern => pattern.test(filename));
+    }
+
   return {
     visitor: {
       Program: {
@@ -195,19 +230,7 @@ module.exports = function plugin(api, options) {
             // ignore polyfills & babel runtimes
             if (
               process.env.DISABLE_OPTIMIZE
-              || state.filename.includes('react-native-url-polyfill')
-              || state.filename.includes('polyfills')
-              || state.filename.includes('@babel/runtime')
-              || state.filename.includes('metro-runtime/src/modules/asyncRequire.js')
-              || state.filename.includes('@react-native/asset-registry')
-              // ignore cjs
-              || state.filename.endsWith('.cjs')
-              || state.filename.endsWith('.cjs.js')
-              || state.filename.includes(
-                'react-native/Libraries/Image/AssetRegistry.js',
-              )
-              // jsx-runtime.js || jsx-runtime.production.min.js
-              || state.filename.includes('jsx-runtime.')
+              || shouldExclude(state.filename)
             ) {
               return
             }
