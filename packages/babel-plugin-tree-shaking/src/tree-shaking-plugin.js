@@ -183,7 +183,7 @@ const getOriginExportLoc = (
   }
 }
 
-  // 默认排除规则
+  // default exclude patterns
   const defaultExcludePatterns = [
     /react-native-url-polyfill/,
     /polyfills/,
@@ -200,25 +200,18 @@ module.exports = function plugin(api, options) {
   if (!fs.existsSync(DEFAULT_ROOT)) {
     fs.mkdirSync(DEFAULT_ROOT, { recursive: true })
   }
-    // 合并用户自定义的排除规则
+    // merge user custom exclude patterns
   const {
     excludePatterns = [],
   } = options
 
-    
-  console.log(excludePatterns, 'excludePatterns')
   const allExcludePatterns = [...defaultExcludePatterns, ...excludePatterns]
   const excludePattern = allExcludePatterns.join('|')
   const excludeRegex = new RegExp(excludePattern)
-  console.log(excludeRegex, 'excludeRegex')
-
 
 
     // 检查文件是否应该被排除
     function shouldExclude(filename) {
-      if (filename.includes('asgard')) {
-        console.log(filename, 'filename', allExcludePatterns.some(pattern => pattern.test(filename)))
-      }
       return allExcludePatterns.some(pattern => pattern.test(filename));
     }
 
