@@ -1,5 +1,27 @@
 # @xhsfe/metro-plugin-tree-shaking
 
+## 0.1.8
+
+### Patch Changes
+
+- 05ca0e5: feat: treeShaking support `excludePatterns` optional paramater
+
+  Example:
+
+  ```js [babel.config.js]
+  module.exports = {
+    presets: [
+      [
+        "module:@xhsfe/metro-plugin-tree-shaking",
+        { excludePatterns: [new RegExp("/react/")] },
+      ],
+    ],
+  };
+  ```
+
+- Updated dependencies [05ca0e5]
+  - @xhsfe/babel-plugin-tree-shaking@0.1.8
+
 ## 0.1.7
 
 ### Patch Changes
