@@ -9,7 +9,7 @@ module.exports =
       }
     : /** react-native */ {
         presets: [
-          ["./tree-shaking-preset", { excludePatterns: [new RegExp('/exclude/')] }],
+          ["./tree-shaking-preset", { excludePatterns: [new RegExp('/exclude/')], checkExclude: process.env.DISABLE_CHECK_EXCLUDE !== 'true' }],
           ["module:metro-react-native-babel-preset", {}],
         ],
         env: {

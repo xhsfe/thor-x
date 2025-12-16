@@ -32,8 +32,13 @@ test('exclude path', () => {
     `METRO_TREE_SHAKING_CACHE_ROOT=${METRO_TREE_SHAKING_CACHE_ROOT} react-native bundle --platform=native --entry-file=${ENTRY_FILE} --bundle-output=${BUNDLE_OUTPUT}/optimize.jsbundle --sourcemap-output=${BUNDLE_OUTPUT}/optimize.jsbundle.map --dev=true`
   )
 
+  execSync(
+    `DISABLE_CHECK_EXCLUDE=true METRO_TREE_SHAKING_CACHE_ROOT=${METRO_TREE_SHAKING_CACHE_ROOT} react-native bundle --platform=native --entry-file=${ENTRY_FILE} --bundle-output=${BUNDLE_OUTPUT}/optimize-disable-check-exclude.jsbundle --sourcemap-output=${BUNDLE_OUTPUT}/optimize-disable-check-exclude.jsbundle.map --dev=true`
+  )
+
   const originContent = fs.readFileSync(path.join(OUTPUT_ROOT, 'origin.jsbundle'), { encoding: 'utf8' })
   const optimizedContent = fs.readFileSync(path.join(OUTPUT_ROOT, 'optimize.jsbundle'), { encoding: 'utf8' })
+  const optimizedDisableCheckExcludeContent = fs.readFileSync(path.join(OUTPUT_ROOT, 'optimize-disable-check-exclude.jsbundle'), { encoding: 'utf8' })
   const diffs = JSON.stringify(
     diffLines(originContent, optimizedContent, {
       ignoreWhitespace: true,
@@ -41,5 +46,13 @@ test('exclude path', () => {
     null,
     '\t'
   )
+  const diffsDisableCheckExclude = JSON.stringify(
+    diffLines(originContent, optimizedDisableCheckExcludeContent, {
+      ignoreWhitespace: true,
+    }).filter((item) => item.added || item.removed),
+    null,
+    '\t'
+  )
   expect(diffs).toMatchSnapshot()
+  expect(diffsDisableCheckExclude).toMatchSnapshot()
 })

@@ -195,7 +195,6 @@ const getOriginExportLoc = (
     /jsx-runtime\./,
   ]
 
-
 module.exports = function plugin(api, options) {
   if (!fs.existsSync(DEFAULT_ROOT)) {
     fs.mkdirSync(DEFAULT_ROOT, { recursive: true })
