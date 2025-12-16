@@ -184,7 +184,7 @@ const getOriginExportLoc = (
 }
 
   // default exclude patterns
-  const defaultExcludePatterns = [
+  const forceExcludePatterns = [
     /react-native-url-polyfill/,
     /polyfills/,
     /@babel\/runtime/,
@@ -203,13 +203,18 @@ module.exports = function plugin(api, options) {
     // merge user custom exclude patterns
   const {
     excludePatterns = [],
+    checkExclude = true,
   } = options
 
-  const allExcludePatterns = [...defaultExcludePatterns, ...excludePatterns]
+  const allExcludePatterns = [...forceExcludePatterns, ...excludePatterns]
 
   // check if the file should be excluded
   function shouldExclude(filename) {
     return allExcludePatterns.some(pattern => pattern.test(filename));
+  }
+
+  function isForceExclude(filename) {
+    return forceExcludePatterns.some(pattern => pattern.test(filename));
   }
 
   return {
@@ -220,7 +225,7 @@ module.exports = function plugin(api, options) {
             // ignore polyfills & babel runtimes
             if (
               process.env.DISABLE_OPTIMIZE
-              || shouldExclude(state.filename)
+             || isForceExclude(state.filename)
             ) {
               return
             }
@@ -253,6 +258,9 @@ module.exports = function plugin(api, options) {
                 return true
               }
               if (graph[state.filename].parts[partId].isLive) {
+                return true
+              }
+              if (checkExclude && graph[state.filename].isExclude) {
                 return true
               }
               if (part.type === 'ExportNamedDeclaration') {
@@ -293,6 +301,7 @@ module.exports = function plugin(api, options) {
                 '*': [],
               },
               isLive: false,
+              isExclude: shouldExclude(state.filename),
               defer: false,
               deferrable: true,
             }
@@ -762,6 +771,35 @@ module.exports.serializer = function serializer(
           eagerExecuteModuleVisitor.push(modulePath)
           eagerExecuteModules.add(modulePath)
           graph[modulePath].deferrable = false
+        }
+      })
+    }
+  }
+
+  // mark all dependencies of excluded modules as excluded
+  const excludeModules = new Set()
+  const excludeModuleVisitor = []
+
+  // collect all initial marked as isExclude files
+  Object.keys(graph).forEach(filePath => {
+    if (graph[filePath] && graph[filePath].isExclude) {
+      excludeModuleVisitor.push(filePath)
+      excludeModules.add(filePath)
+    }
+  })
+
+  // propagate isExclude to all dependencies
+  while (excludeModuleVisitor.length > 0) {
+    const currentPath = excludeModuleVisitor.pop()
+    const current = metroGraph.dependencies.get(currentPath)
+
+    if (current) {
+      Array.from(current.dependencies.values()).forEach(module => {
+        const modulePath = module.absolutePath
+        if (graph[modulePath] && !excludeModules.has(modulePath)) {
+          excludeModuleVisitor.push(modulePath)
+          excludeModules.add(modulePath)
+          graph[modulePath].isExclude = true
         }
       })
     }
