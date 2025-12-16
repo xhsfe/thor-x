@@ -1,5 +1,12 @@
 # @xhsfe/metro-plugin-tree-shaking
 
+## 0.1.9
+
+### Patch Changes
+
+- Updated dependencies [8642187]
+  - @xhsfe/babel-plugin-tree-shaking@0.1.9
+
 ## 0.1.8
 
 ### Patch Changes

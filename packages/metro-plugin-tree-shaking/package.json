@@ -1,6 +1,6 @@
 {
   "name": "@xhsfe/metro-plugin-tree-shaking",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Tree shaking plugin for metro",
   "main": "index.js",
   "private": false,
