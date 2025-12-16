@@ -14,3 +14,33 @@ exports[`exclude path 1`] = `
 	}
 ]"
 `;
+
+exports[`exclude path 2`] = `
+"[
+	{
+		"count": 13,
+		"removed": true,
+		"value": "Object.defineProperty(exports, \\"diff\\", {\\nenumerable: true,\\nget: function get() {\\nreturn _$$_REQUIRE(_dependencyMap[1], \\"./diff\\").diff;\\n}\\n});\\nObject.defineProperty(exports, \\"multiple\\", {\\nenumerable: true,\\nget: function get() {\\nreturn _$$_REQUIRE(_dependencyMap[2], \\"../exclude-deps/multiple\\").multiple;\\n}\\n});\\n},1,[2,3,4],\\"__test__/libs/exclude/math.js\\");\\n"
+	},
+	{
+		"count": 1,
+		"added": true,
+		"value": "},1,[2],\\"__test__/libs/exclude/math.js\\");\\n"
+	},
+	{
+		"count": 18,
+		"removed": true,
+		"value": "__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {\\nObject.defineProperty(exports, \\"__esModule\\", {\\nvalue: true\\n});\\nexports.diff = void 0;\\nvar diff = exports.diff = function diff(a, b) {\\nreturn a - b;\\n};\\n},3,[],\\"__test__/libs/exclude/diff.js\\");\\n__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {\\nObject.defineProperty(exports, \\"__esModule\\", {\\nvalue: true\\n});\\nexports.multiple = void 0;\\nvar multiple = exports.multiple = function multiple(a, b) {\\nreturn a * b;\\n};\\n},4,[],\\"__test__/libs/exclude-deps/multiple.js\\");\\n"
+	},
+	{
+		"count": 1,
+		"removed": true,
+		"value": "//# sourceMappingURL=origin.jsbundle.map"
+	},
+	{
+		"count": 1,
+		"added": true,
+		"value": "//# sourceMappingURL=optimize-disable-check-exclude.jsbundle.map"
+	}
+]"
+`;
